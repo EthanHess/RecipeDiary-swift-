@@ -10,4 +10,9 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
+    var titleLabel = UILabel()
+    
+    
+    
+    
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2734206E1B66BB4F00CAC46B /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2734206C1B66BB4F00CAC46B /* Recipe.swift */; };
+		2734206F1B66BB4F00CAC46B /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2734206D1B66BB4F00CAC46B /* Ingredient.swift */; };
 		274108B01B66996A005116E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274108AF1B66996A005116E0 /* AppDelegate.swift */; };
 		274108B21B66996A005116E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274108B11B66996A005116E0 /* ViewController.swift */; };
 		274108B51B66996A005116E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 274108B31B66996A005116E0 /* Main.storyboard */; };
@@ -31,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2734206C1B66BB4F00CAC46B /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		2734206D1B66BB4F00CAC46B /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		274108AA1B66996A005116E0 /* RecipeDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		274108AE1B66996A005116E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		274108AF1B66996A005116E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +97,8 @@
 				274108D11B66A3F6005116E0 /* CollectionViewCell.swift */,
 				274108D31B66A40B005116E0 /* RecipeController.swift */,
 				274108D51B66B071005116E0 /* Stack.swift */,
+				2734206C1B66BB4F00CAC46B /* Recipe.swift */,
+				2734206D1B66BB4F00CAC46B /* Ingredient.swift */,
 				274108D71B66B230005116E0 /* Model.xcdatamodeld */,
 				274108B31B66996A005116E0 /* Main.storyboard */,
 				274108B61B66996A005116E0 /* Images.xcassets */,
@@ -229,11 +235,13 @@
 			files = (
 				274108D01B66A33D005116E0 /* DetailViewController.swift in Sources */,
 				274108B21B66996A005116E0 /* ViewController.swift in Sources */,
+				2734206F1B66BB4F00CAC46B /* Ingredient.swift in Sources */,
 				274108D21B66A3F6005116E0 /* CollectionViewCell.swift in Sources */,
 				274108D91B66B230005116E0 /* Model.xcdatamodeld in Sources */,
 				274108D41B66A40B005116E0 /* RecipeController.swift in Sources */,
 				274108D61B66B071005116E0 /* Stack.swift in Sources */,
 				274108B01B66996A005116E0 /* AppDelegate.swift in Sources */,
+				2734206E1B66BB4F00CAC46B /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +437,7 @@
 				274108CB1B66996A005116E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		274108CC1B66996A005116E0 /* Build configuration list for PBXNativeTarget "RecipeDiaryTests" */ = {
 			isa = XCConfigurationList;
@@ -437,6 +446,7 @@
 				274108CE1B66996A005116E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
