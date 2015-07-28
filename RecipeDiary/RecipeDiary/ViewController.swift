@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    var collectionView = UICollectionView()
+    var collectionView : UICollectionView!
     var addButton = UIBarButtonItem()
     
 
@@ -19,23 +19,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         //sets up collectionView
         
-        collectionView = UICollectionView.new()
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 90, height: 120)
         
-        let flowLayout = UICollectionViewFlowLayout.new()
-        
-//        collectionView.frame = CGRectMake(0, 75, self.view.frame.size.width, self.view.frame.size.height - 75)
-        
-        collectionView = UICollectionView(frame: CGRectMake(0, 75, self.view.frame.size.width, self.view.frame.size.height - 75), collectionViewLayout: flowLayout)
-        
-        flowLayout.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2)
-        
-        collectionView.backgroundColor = UIColor.cyanColor()
-        
+        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        
+        collectionView.registerClass(CollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView)
         
         //sets up add button
@@ -46,6 +38,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     }
     
+
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return 4
@@ -53,9 +47,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell: CollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
+        let cell: CollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! CollectionViewCell
         
         
+        // configure cell here
+        
+        cell.backgroundColor = UIColor.cyanColor()
+        
+        return cell
         
     
     }
@@ -64,11 +63,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
     }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
-        
-    }
+
     
     func addRecipe() {
         
