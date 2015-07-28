@@ -13,7 +13,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     var imageView : UIImageView!
     var tableView : UITableView!
     var nameTextField : UITextField!
-    var descriptionTextField : UITextField!
+    var ingredientTextField : UITextField!
     var saveButton : UIButton!
     var chooseImageButton : UIButton!
     var imagePicker : UIImagePickerController?
@@ -32,6 +32,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         }
         
         self.setUpTableView()
+        self.setUpImagePicker()
+        self.setUpSubviews()
         
     }
     
@@ -43,12 +45,11 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func setUpTableView() {
     
-        
         tableView = UITableView.new()
-        tableView.delegate = self
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.frame = CGRectMake(self.view.frame.size.width / 10, self.view.frame.size.height / 2, self.view.frame.size.width - self.view.frame.size.width / 5, self.view.frame.size.height - 20)
+        tableView = UITableView(frame: CGRectMake(self.view.frame.size.width / 10, self.view.frame.size.height / 2, self.view.frame.size.width - self.view.frame.size.width / 5, self.view.frame.size.height / 2 - 20), style: UITableViewStyle.Grouped)
         tableView.layer.cornerRadius = 10
         tableView.layer.borderColor = UIColor.blackColor().CGColor
         tableView.layer.borderWidth = 2
@@ -57,26 +58,84 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     
-    //table view data source
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func setUpImagePicker() {
         
-        let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         
-        cell.textLabel?.text = "test"
-        
-        return cell
         
     }
+    
+    func setUpSubviews() {
+        
+        imageView = UIImageView.new()
+        imageView.frame = CGRectMake(self.view.frame.size.width / 10, 70, 120, 120)
+        imageView.layer.cornerRadius = 60
+        imageView.layer.borderColor = UIColor.blackColor().CGColor
+        imageView.layer.borderWidth = 2
+        imageView.backgroundColor = UIColor.grayColor()
+        self.view.addSubview(imageView)
+        
+        nameTextField = UITextField.new()
+        nameTextField.frame = CGRectMake(self.view.frame.size.width / 2, 70, self.view.frame.size.width / 2 - 25, 50)
+        nameTextField.placeholder = "Title"
+        nameTextField.borderStyle = UITextBorderStyle.RoundedRect
+        nameTextField.delegate = self
+        self.view .addSubview(nameTextField)
+        
+        ingredientTextField = UITextField.new()
+        ingredientTextField.frame = CGRectMake(self.view.frame.size.width / 2, 135, self.view.frame.size.width / 2 - 25, 50)
+        ingredientTextField.placeholder = "Title"
+        ingredientTextField.borderStyle = UITextBorderStyle.RoundedRect
+        ingredientTextField.delegate = self
+        self.view .addSubview(ingredientTextField)
+        
+        
+        
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    
+    //table view data source
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 3
     }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        
+        
+        
+        cell.textLabel?.text = "test"
+        cell.textLabel?.numberOfLines = 0
+        
+        return cell
+        
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func saveRecipeData() {
+        
+        
+        
+    }
+    
+    func saveIngredient() {
+        
+        
+        
     }
     
 
