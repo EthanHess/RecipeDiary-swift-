@@ -45,15 +45,19 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func setUpTableView() {
     
-        tableView = UITableView.new()
+        
+        tableView = UITableView(frame: CGRectMake(self.view.frame.size.width / 10, self.view.frame.size.height / 2, self.view.frame.size.width - self.view.frame.size.width / 5, self.view.frame.size.height / 2 - 20), style: UITableViewStyle.Grouped)
+            
         tableView.dataSource = self
         tableView.delegate = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView = UITableView(frame: CGRectMake(self.view.frame.size.width / 10, self.view.frame.size.height / 2, self.view.frame.size.width - self.view.frame.size.width / 5, self.view.frame.size.height / 2 - 20), style: UITableViewStyle.Grouped)
+            
         tableView.layer.cornerRadius = 10
         tableView.layer.borderColor = UIColor.blackColor().CGColor
         tableView.layer.borderWidth = 2
+            
         self.view.addSubview(tableView)
+        
         
     }
     

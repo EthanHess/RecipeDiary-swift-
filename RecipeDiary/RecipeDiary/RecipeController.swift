@@ -7,9 +7,34 @@
 //
 
 import UIKit
+import CoreData
 
 class RecipeController: NSObject {
     
+    var recipies: [Recipe] {
+        
+        get {
+            return Stack.sharedInstance.managedObjectContext.executeFetchRequest(NSFetchRequest(entityName: "Recipe"), error: nil) as! Array
+            
+        }
+    }
+    
     static let sharedInstance = RecipeController ()
+    
+    func addRecipeWithName(title: String) {
+        
+        var recipe = NSEntityDescription.insertNewObjectForEntityForName("Recipe", inManagedObjectContext: Stack.sharedInstance.managedObjectContext) as! Recipe
+        
+        recipe.title = title
+        
+        self.save()
+        
+    }
+    
+    func save () {
+    
+        Stack.sharedInstance.managedObjectContext.save(nil)
+        
+    }
    
 }
