@@ -111,8 +111,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         saveButton.layer.cornerRadius = 50
         saveButton.layer.borderColor = UIColor.blackColor().CGColor
         saveButton.layer.borderWidth = 2
-        saveButton.backgroundColor = UIColor.yellowColor()
+        saveButton.backgroundColor = UIColor.blueColor()
         saveButton.setTitle("Save Recipe", forState: UIControlState.Normal)
+        saveButton.titleLabel?.numberOfLines = 0
         saveButton.addTarget(self, action: "saveRecipeData", forControlEvents: UIControlEvents.TouchUpInside)
         slideOutView.addSubview(saveButton)
         
