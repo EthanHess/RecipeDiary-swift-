@@ -27,7 +27,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
         self.view.backgroundColor = UIColor.whiteColor()
         
-        barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "popOutView")
+        barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "controlPopView")
         navigationItem.rightBarButtonItem = barButton
         
         if let recipe = self.recipe {
@@ -106,6 +106,16 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         slideOutView.backgroundColor = UIColor.lightGrayColor()
         self.view.addSubview(slideOutView)
         
+        saveButton = UIButton.new()
+        saveButton.frame = CGRectMake(50, 100, 100, 100)
+        saveButton.layer.cornerRadius = 50
+        saveButton.layer.borderColor = UIColor.blackColor().CGColor
+        saveButton.layer.borderWidth = 2
+        saveButton.backgroundColor = UIColor.yellowColor()
+        saveButton.setTitle("Save Recipe", forState: UIControlState.Normal)
+        saveButton.addTarget(self, action: "saveRecipeData", forControlEvents: UIControlEvents.TouchUpInside)
+        slideOutView.addSubview(saveButton)
+        
         
     }
     
@@ -155,7 +165,28 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
     }
     
-    func popOutView() {
+    func controlPopView() {
+        
+        if slideOutView.frame.origin.x > self.view.frame.size.width - 16 {
+            
+            self.popOutView(slideOutView, distance: self.slideOutView.frame.size.width - 15)
+        }
+        
+        
+        
+    }
+    
+    func popOutView(view: UIView, distance: CGFloat) {
+        
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
+            
+            view.center = CGPointMake(view.center.x - distance, view.center.y)
+            
+        })
+        
+    }
+    
+    func popBackView(view: UIView, distance: CGFloat) {
         
         
         
