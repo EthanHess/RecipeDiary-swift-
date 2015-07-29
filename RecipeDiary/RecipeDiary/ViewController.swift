@@ -51,6 +51,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
         // configure cell here
+        cell.titleLabel.text = "test"
         
         cell.backgroundColor = UIColor.cyanColor()
         
