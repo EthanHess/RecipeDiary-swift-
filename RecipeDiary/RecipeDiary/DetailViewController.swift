@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
 
     var imageView : UIImageView!
     var tableView : UITableView!
@@ -18,12 +18,17 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     var chooseImageButton : UIButton!
     var imagePicker : UIImagePickerController?
     var chosenImage : UIImage?
+    var slideOutView: UIView!
+    var barButton: UIBarButtonItem!
     var recipe : Recipe?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.whiteColor()
+        
+        barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "popOutView")
+        navigationItem.rightBarButtonItem = barButton
         
         if let recipe = self.recipe {
         
@@ -64,6 +69,10 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func setUpImagePicker() {
         
+        imagePicker = UIImagePickerController.new()
+        imagePicker?.delegate = self
+        imagePicker?.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePicker?.allowsEditing = true
         
         
     }
@@ -83,15 +92,19 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         nameTextField.placeholder = "Title"
         nameTextField.borderStyle = UITextBorderStyle.RoundedRect
         nameTextField.delegate = self
-        self.view .addSubview(nameTextField)
+        self.view.addSubview(nameTextField)
         
         ingredientTextField = UITextField.new()
         ingredientTextField.frame = CGRectMake(self.view.frame.size.width / 2, 135, self.view.frame.size.width / 2 - 25, 50)
         ingredientTextField.placeholder = "Title"
         ingredientTextField.borderStyle = UITextBorderStyle.RoundedRect
         ingredientTextField.delegate = self
-        self.view .addSubview(ingredientTextField)
+        self.view.addSubview(ingredientTextField)
         
+        slideOutView = UIView.new()
+        slideOutView.frame = CGRectMake(self.view.frame.size.width - 15, 0, self.view.frame.size.width - 50, self.view.frame.size.height)
+        slideOutView.backgroundColor = UIColor.lightGrayColor()
+        self.view.addSubview(slideOutView)
         
         
     }
@@ -137,6 +150,12 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     func saveIngredient() {
+        
+        
+        
+    }
+    
+    func popOutView() {
         
         
         

@@ -31,6 +31,12 @@ class RecipeController: NSObject {
         
     }
     
+    func addIngredientToRecipe(recipe: Recipe) {
+        
+        
+        
+    }
+    
     func save () {
     
         Stack.sharedInstance.managedObjectContext.save(nil)
