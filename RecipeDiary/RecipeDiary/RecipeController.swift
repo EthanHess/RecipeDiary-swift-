@@ -21,7 +21,7 @@ class RecipeController: NSObject {
     
     static let sharedInstance = RecipeController ()
     
-    func addRecipeWithName(title: String) {
+    func addRecipeWithName(title: String, andPicture picture: UIImage) {
         
         var recipe = NSEntityDescription.insertNewObjectForEntityForName("Recipe", inManagedObjectContext: Stack.sharedInstance.managedObjectContext) as! Recipe
         

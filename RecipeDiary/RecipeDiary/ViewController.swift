@@ -27,7 +27,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.registerClass(CollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.backgroundColor = UIColor(red: 6/255, green: 37/255, blue: 108/255, alpha: 1)
         self.view.addSubview(collectionView)
         
         //sets up add button

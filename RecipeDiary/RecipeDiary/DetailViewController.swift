@@ -16,16 +16,18 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     var ingredientTextField : UITextField!
     var saveButton : UIButton!
     var chooseImageButton : UIButton!
+    var ingredientButton : UIButton!
     var imagePicker : UIImagePickerController?
     var chosenImage : UIImage?
     var slideOutView: UIView!
     var barButton: UIBarButtonItem!
+    var popBackButton: UIButton!
     var recipe : Recipe?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor(red: 6/255, green: 37/255, blue: 108/255, alpha: 1)
         
         barButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "controlPopView")
         navigationItem.rightBarButtonItem = barButton
@@ -72,8 +74,22 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         imagePicker = UIImagePickerController.new()
         imagePicker?.delegate = self
         imagePicker?.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        imagePicker?.allowsEditing = true
+        imagePicker?.allowsEditing = false
         
+        
+    }
+    
+    func presentImagePicker() {
+        
+        presentViewController(imagePicker!, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+        
+        chosenImage = image
+        imageView.image = chosenImage
+        self.dismissViewControllerAnimated(true, completion: nil)
         
     }
     
@@ -85,6 +101,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         imageView.layer.borderColor = UIColor.blackColor().CGColor
         imageView.layer.borderWidth = 2
         imageView.backgroundColor = UIColor.grayColor()
+        imageView.layer.masksToBounds = true
         self.view.addSubview(imageView)
         
         nameTextField = UITextField.new()
@@ -117,6 +134,28 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         saveButton.addTarget(self, action: "saveRecipeData", forControlEvents: UIControlEvents.TouchUpInside)
         slideOutView.addSubview(saveButton)
         
+        chooseImageButton = UIButton.new()
+        chooseImageButton.frame = CGRectMake(50, 250, 100, 100)
+        chooseImageButton.layer.cornerRadius = 50
+        chooseImageButton.layer.borderColor = UIColor.blackColor().CGColor
+        chooseImageButton.layer.borderWidth = 2
+        chooseImageButton.backgroundColor = UIColor.blueColor()
+        chooseImageButton.setTitle("Upload Image", forState: UIControlState.Normal)
+        chooseImageButton.titleLabel?.numberOfLines = 0
+        chooseImageButton.addTarget(self, action: "presentImagePicker", forControlEvents: UIControlEvents.TouchUpInside)
+        slideOutView.addSubview(chooseImageButton)
+        
+        popBackButton = UIButton.new()
+        popBackButton.frame = CGRectMake(75, self.slideOutView.frame.size.height - 70, 50, 50)
+        popBackButton.layer.cornerRadius = 25
+        popBackButton.layer.borderWidth = 2
+        popBackButton.layer.borderColor = UIColor.blackColor().CGColor
+        popBackButton.backgroundColor = UIColor.whiteColor()
+        popBackButton.setTitle("<", forState: UIControlState.Normal)
+        popBackButton.titleLabel?.numberOfLines = 0
+        popBackButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        popBackButton.addTarget(self, action: "controlPopInView", forControlEvents: UIControlEvents.TouchUpInside)
+        slideOutView.addSubview(popBackButton)
         
     }
     
@@ -169,12 +208,16 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     func controlPopView() {
         
         if slideOutView.frame.origin.x > self.view.frame.size.width - 16 {
+
+        self.popOutView(slideOutView, distance: self.slideOutView.frame.size.width - 15)
             
-            self.popOutView(slideOutView, distance: self.slideOutView.frame.size.width - 15)
         }
         
+    }
+    
+    func controlPopInView() {
         
-        
+        self.popBackView(slideOutView, distance: self.slideOutView.frame.size.width - 15)
     }
     
     func popOutView(view: UIView, distance: CGFloat) {
@@ -189,6 +232,11 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func popBackView(view: UIView, distance: CGFloat) {
         
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
+            
+            view.center = CGPointMake(view.center.x + distance, view.center.y)
+            
+        })
         
         
     }
