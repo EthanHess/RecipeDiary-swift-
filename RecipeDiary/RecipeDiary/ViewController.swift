@@ -42,16 +42,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 4
+        return RecipeController.sharedInstance.recipies.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell: CollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! CollectionViewCell
         
+        let recipe = RecipeController.sharedInstance.recipies[indexPath.row]
         
         // configure cell here
-        cell.titleLabel.text = "test"
+        
+        let imageData = UIImage(data: recipe.picture)
+        
+        cell.titleLabel.text = recipe.title
+        cell.imageView.image = imageData
         
         cell.backgroundColor = UIColor.cyanColor()
         
@@ -62,7 +67,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
+        let detailViewController = DetailViewController.new()
         
+        detailViewController.recipe = RecipeController.sharedInstance.recipies[indexPath.row]
+        
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 
     

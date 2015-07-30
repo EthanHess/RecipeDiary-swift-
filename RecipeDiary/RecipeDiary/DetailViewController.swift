@@ -42,11 +42,20 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         self.setUpImagePicker()
         self.setUpSubviews()
         
+        self.controlPopView()
     }
     
     func updateWithRecipe(recipe: Recipe) {
         
-        // update with recipe
+        if let recipe = self.recipe {
+        
+        self.title = recipe.title
+        
+        var imageData = UIImage(data: recipe.picture)
+        
+        self.imageView.image = imageData
+        
+        }
         
     }
     
