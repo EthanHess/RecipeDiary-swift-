@@ -25,15 +25,39 @@ class RecipeController: NSObject {
         
         var recipe = NSEntityDescription.insertNewObjectForEntityForName("Recipe", inManagedObjectContext: Stack.sharedInstance.managedObjectContext) as! Recipe
         
+        var data = UIImagePNGRepresentation(picture)
+        
+        recipe.picture = data
         recipe.title = title
         
         self.save()
         
     }
     
-    func addIngredientToRecipe(recipe: Recipe) {
+    func addIngredientToRecipe(recipe: Recipe, withName name: String) {
         
+        var ingredient = NSEntityDescription.insertNewObjectForEntityForName("Ingredient", inManagedObjectContext: Stack.sharedInstance.managedObjectContext) as! Ingredient
         
+        ingredient.recipe = recipe
+        ingredient.name = name
+        
+        self.save()
+        
+    }
+    
+    func removeRecipe(recipe: Recipe) {
+        
+        recipe.managedObjectContext?.deleteObject(recipe)
+        
+        self.save()
+        
+    }
+    
+    func removeIgredient(ingredient: Ingredient) {
+        
+        ingredient.managedObjectContext?.deleteObject(ingredient)
+        
+        self.save()
         
     }
     

@@ -151,7 +151,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         popBackButton.layer.borderWidth = 2
         popBackButton.layer.borderColor = UIColor.blackColor().CGColor
         popBackButton.backgroundColor = UIColor.whiteColor()
-        popBackButton.setTitle("<", forState: UIControlState.Normal)
+        popBackButton.setTitle(">", forState: UIControlState.Normal)
         popBackButton.titleLabel?.numberOfLines = 0
         popBackButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         popBackButton.addTarget(self, action: "controlPopInView", forControlEvents: UIControlEvents.TouchUpInside)
