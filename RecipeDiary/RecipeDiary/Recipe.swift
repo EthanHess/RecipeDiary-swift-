@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+@objc(Recipe)
+
 class Recipe: NSManagedObject {
 
     @NSManaged var title: String

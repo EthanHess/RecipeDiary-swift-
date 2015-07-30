@@ -35,6 +35,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addRecipe")
         navigationItem.rightBarButtonItem = addButton
         
+        collectionView.reloadData()
+        
 
     }
     
