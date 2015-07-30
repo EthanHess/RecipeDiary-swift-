@@ -104,13 +104,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         imageView.layer.masksToBounds = true
         self.view.addSubview(imageView)
         
-        nameTextField = UITextField.new()
-        nameTextField.frame = CGRectMake(self.view.frame.size.width / 2, 70, self.view.frame.size.width / 2 - 25, 50)
-        nameTextField.placeholder = "Title"
-        nameTextField.borderStyle = UITextBorderStyle.RoundedRect
-        nameTextField.delegate = self
-        self.view.addSubview(nameTextField)
-        
         ingredientTextField = UITextField.new()
         ingredientTextField.frame = CGRectMake(self.view.frame.size.width / 2, 135, self.view.frame.size.width / 2 - 25, 50)
         ingredientTextField.placeholder = "Title"
@@ -119,12 +112,22 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         self.view.addSubview(ingredientTextField)
         
         slideOutView = UIView.new()
+        slideOutView.layer.cornerRadius = 10
+        slideOutView.layer.borderColor = UIColor.blackColor().CGColor
+        slideOutView.layer.borderWidth = 2
         slideOutView.frame = CGRectMake(self.view.frame.size.width - 15, 0, self.view.frame.size.width - 50, self.view.frame.size.height)
         slideOutView.backgroundColor = UIColor.lightGrayColor()
         self.view.addSubview(slideOutView)
         
+        nameTextField = UITextField.new()
+        nameTextField.frame = CGRectMake(10, 75, self.slideOutView.frame.size.width / 2 + 50, 50)
+        nameTextField.placeholder = "Title"
+        nameTextField.borderStyle = UITextBorderStyle.RoundedRect
+        nameTextField.delegate = self
+        self.slideOutView.addSubview(nameTextField)
+        
         saveButton = UIButton.new()
-        saveButton.frame = CGRectMake(50, 100, 100, 100)
+        saveButton.frame = CGRectMake(50, 150, 100, 100)
         saveButton.layer.cornerRadius = 50
         saveButton.layer.borderColor = UIColor.blackColor().CGColor
         saveButton.layer.borderWidth = 2
@@ -170,8 +173,11 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     //table view data source
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+//        return self.recipe?.ingredients.count
         
-        return 3
+        return 4
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
