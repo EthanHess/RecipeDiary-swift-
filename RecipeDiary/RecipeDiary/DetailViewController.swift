@@ -46,7 +46,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func updateWithRecipe(recipe: Recipe) {
         
-        
+        // update with recipe
         
     }
     
@@ -96,7 +96,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     func setUpSubviews() {
         
         imageView = UIImageView.new()
-        imageView.frame = CGRectMake(self.view.frame.size.width / 10, 70, 120, 120)
+        imageView.frame = CGRectMake(self.view.frame.size.width / 2 - 60, 75, 120, 120)
         imageView.layer.cornerRadius = 60
         imageView.layer.borderColor = UIColor.blackColor().CGColor
         imageView.layer.borderWidth = 2
@@ -105,22 +105,34 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         self.view.addSubview(imageView)
         
         ingredientTextField = UITextField.new()
-        ingredientTextField.frame = CGRectMake(self.view.frame.size.width / 2, 135, self.view.frame.size.width / 2 - 25, 50)
-        ingredientTextField.placeholder = "Title"
+        ingredientTextField.frame = CGRectMake(50, 225, self.view.frame.size.width - 180, 50)
+        ingredientTextField.placeholder = "Add Ingredient"
         ingredientTextField.borderStyle = UITextBorderStyle.RoundedRect
         ingredientTextField.delegate = self
         self.view.addSubview(ingredientTextField)
+        
+        ingredientButton = UIButton.new()
+        ingredientButton.frame = CGRectMake(ingredientTextField.frame.size.width + 70, 225, 50, 50)
+        ingredientButton.layer.cornerRadius = 25
+        ingredientButton.layer.borderColor = UIColor.blackColor().CGColor
+        ingredientButton.layer.borderWidth = 2
+        ingredientButton.backgroundColor = UIColor.redColor()
+        ingredientButton.setTitle("+", forState: UIControlState.Normal)
+        ingredientButton.titleLabel?.numberOfLines = 0
+        ingredientButton.addTarget(self, action: "saveIngredient", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(ingredientButton)
+        
         
         slideOutView = UIView.new()
         slideOutView.layer.cornerRadius = 10
         slideOutView.layer.borderColor = UIColor.blackColor().CGColor
         slideOutView.layer.borderWidth = 2
         slideOutView.frame = CGRectMake(self.view.frame.size.width - 15, 0, self.view.frame.size.width - 50, self.view.frame.size.height)
-        slideOutView.backgroundColor = UIColor.lightGrayColor()
+        slideOutView.backgroundColor = UIColor(red: 95/255, green: 242/255, blue: 168/255, alpha:1);
         self.view.addSubview(slideOutView)
         
         nameTextField = UITextField.new()
-        nameTextField.frame = CGRectMake(10, 75, self.slideOutView.frame.size.width / 2 + 50, 50)
+        nameTextField.frame = CGRectMake(15, 75, self.slideOutView.frame.size.width / 2 + 50, 50)
         nameTextField.placeholder = "Title"
         nameTextField.borderStyle = UITextBorderStyle.RoundedRect
         nameTextField.delegate = self
@@ -138,7 +150,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         slideOutView.addSubview(saveButton)
         
         chooseImageButton = UIButton.new()
-        chooseImageButton.frame = CGRectMake(50, 250, 100, 100)
+        chooseImageButton.frame = CGRectMake(50, 280, 100, 100)
         chooseImageButton.layer.cornerRadius = 50
         chooseImageButton.layer.borderColor = UIColor.blackColor().CGColor
         chooseImageButton.layer.borderWidth = 2
@@ -174,9 +186,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-//        return self.recipe?.ingredients.count
+        if let recipe = self.recipe {
+            
+            return recipe.ingredients.count
+        }
         
-        return 4
+        else {
+            
+            return 0
+        }
         
     }
     
@@ -184,10 +202,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
         
+        if let recipe = self.recipe {
         
-        
-        cell.textLabel?.text = "test"
-        cell.textLabel?.numberOfLines = 0
+        let ingredient : Ingredient = recipe.ingredients[indexPath.row] as! Ingredient
+            
+            cell.textLabel?.text = ingredient.name
+            cell.textLabel?.numberOfLines = 0
+        }
         
         return cell
         
@@ -201,13 +222,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func saveRecipeData() {
         
-        
+        RecipeController.sharedInstance.addRecipeWithName(self.nameTextField.text, andPicture: self.imageView.image!)
         
     }
     
     func saveIngredient() {
         
+        RecipeController.sharedInstance.addIngredientToRecipe(self.recipe!, withName: self.ingredientTextField.text)
         
+        tableView.reloadData()
         
     }
     
