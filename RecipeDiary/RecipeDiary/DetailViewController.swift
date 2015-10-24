@@ -51,9 +51,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         self.title = recipe.title
         
-        var imageData = UIImage(data: recipe.picture)
+        let imageData = UIImage(data: recipe.picture)
         
-        self.imageView.image = imageData
+        self.imageView?.image = imageData
         
         }
         
@@ -80,7 +80,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func setUpImagePicker() {
         
-        imagePicker = UIImagePickerController.new()
+        imagePicker = UIImagePickerController()
         imagePicker?.delegate = self
         imagePicker?.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         imagePicker?.allowsEditing = false
@@ -104,7 +104,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func setUpSubviews() {
         
-        imageView = UIImageView.new()
+        imageView = UIImageView()
         imageView.frame = CGRectMake(self.view.frame.size.width / 2 - 60, 75, 120, 120)
         imageView.layer.cornerRadius = 60
         imageView.layer.borderColor = UIColor.blackColor().CGColor
@@ -113,14 +113,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         imageView.layer.masksToBounds = true
         self.view.addSubview(imageView)
         
-        ingredientTextField = UITextField.new()
+        ingredientTextField = UITextField()
         ingredientTextField.frame = CGRectMake(50, 225, self.view.frame.size.width - 180, 50)
         ingredientTextField.placeholder = "Add Ingredient"
         ingredientTextField.borderStyle = UITextBorderStyle.RoundedRect
         ingredientTextField.delegate = self
         self.view.addSubview(ingredientTextField)
         
-        ingredientButton = UIButton.new()
+        ingredientButton = UIButton()
         ingredientButton.frame = CGRectMake(ingredientTextField.frame.size.width + 70, 225, 50, 50)
         ingredientButton.layer.cornerRadius = 25
         ingredientButton.layer.borderColor = UIColor.blackColor().CGColor
@@ -132,7 +132,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         self.view.addSubview(ingredientButton)
         
         
-        slideOutView = UIView.new()
+        slideOutView = UIView()
         slideOutView.layer.cornerRadius = 10
         slideOutView.layer.borderColor = UIColor.blackColor().CGColor
         slideOutView.layer.borderWidth = 2
@@ -140,14 +140,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         slideOutView.backgroundColor = UIColor(red: 95/255, green: 242/255, blue: 168/255, alpha:1);
         self.view.addSubview(slideOutView)
         
-        nameTextField = UITextField.new()
+        nameTextField = UITextField()
         nameTextField.frame = CGRectMake(15, 75, self.slideOutView.frame.size.width / 2 + 50, 50)
         nameTextField.placeholder = "Title"
         nameTextField.borderStyle = UITextBorderStyle.RoundedRect
         nameTextField.delegate = self
         self.slideOutView.addSubview(nameTextField)
         
-        saveButton = UIButton.new()
+        saveButton = UIButton()
         saveButton.frame = CGRectMake(50, 150, 100, 100)
         saveButton.layer.cornerRadius = 50
         saveButton.layer.borderColor = UIColor.blackColor().CGColor
@@ -158,7 +158,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         saveButton.addTarget(self, action: "saveRecipeData", forControlEvents: UIControlEvents.TouchUpInside)
         slideOutView.addSubview(saveButton)
         
-        chooseImageButton = UIButton.new()
+        chooseImageButton = UIButton()
         chooseImageButton.frame = CGRectMake(50, 280, 100, 100)
         chooseImageButton.layer.cornerRadius = 50
         chooseImageButton.layer.borderColor = UIColor.blackColor().CGColor
@@ -169,7 +169,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         chooseImageButton.addTarget(self, action: "presentImagePicker", forControlEvents: UIControlEvents.TouchUpInside)
         slideOutView.addSubview(chooseImageButton)
         
-        popBackButton = UIButton.new()
+        popBackButton = UIButton()
         popBackButton.frame = CGRectMake(75, self.slideOutView.frame.size.height - 70, 50, 50)
         popBackButton.layer.cornerRadius = 25
         popBackButton.layer.borderWidth = 2
@@ -209,7 +209,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell!
         
         if let recipe = self.recipe {
         
@@ -231,13 +231,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func saveRecipeData() {
         
-        RecipeController.sharedInstance.addRecipeWithName(self.nameTextField.text, andPicture: self.imageView.image!)
+        RecipeController.sharedInstance.addRecipeWithName(self.nameTextField.text!, andPicture: self.imageView.image!)
         
     }
     
     func saveIngredient() {
         
-        RecipeController.sharedInstance.addIngredientToRecipe(self.recipe!, withName: self.ingredientTextField.text)
+        RecipeController.sharedInstance.addIngredientToRecipe(self.recipe!, withName: self.ingredientTextField.text!)
         
         tableView.reloadData()
         

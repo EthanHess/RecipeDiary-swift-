@@ -14,7 +14,7 @@ class RecipeController: NSObject {
     var recipies: [Recipe] {
         
         get {
-            return Stack.sharedInstance.managedObjectContext.executeFetchRequest(NSFetchRequest(entityName: "Recipe"), error: nil) as! Array
+            return (try? Stack.sharedInstance.managedObjectContext.executeFetchRequest(NSFetchRequest(entityName: "Recipe"))) as! Array
             
         }
     }
@@ -23,11 +23,11 @@ class RecipeController: NSObject {
     
     func addRecipeWithName(title: String, andPicture picture: UIImage) {
         
-        var recipe = NSEntityDescription.insertNewObjectForEntityForName("Recipe", inManagedObjectContext: Stack.sharedInstance.managedObjectContext) as! Recipe
+        let recipe = NSEntityDescription.insertNewObjectForEntityForName("Recipe", inManagedObjectContext: Stack.sharedInstance.managedObjectContext) as! Recipe
         
-        var data = UIImagePNGRepresentation(picture)
+        let data = UIImagePNGRepresentation(picture)
         
-        recipe.picture = data
+        recipe.picture = (data)!
         recipe.title = title
         
         self.save()
@@ -36,7 +36,7 @@ class RecipeController: NSObject {
     
     func addIngredientToRecipe(recipe: Recipe, withName name: String) {
         
-        var ingredient = NSEntityDescription.insertNewObjectForEntityForName("Ingredient", inManagedObjectContext: Stack.sharedInstance.managedObjectContext) as! Ingredient
+        let ingredient = NSEntityDescription.insertNewObjectForEntityForName("Ingredient", inManagedObjectContext: Stack.sharedInstance.managedObjectContext) as! Ingredient
         
         ingredient.recipe = recipe
         ingredient.name = name
@@ -63,7 +63,10 @@ class RecipeController: NSObject {
     
     func save () {
     
-        Stack.sharedInstance.managedObjectContext.save(nil)
+        do {
+            try Stack.sharedInstance.managedObjectContext.save()
+        } catch _ {
+        }
         
     }
    

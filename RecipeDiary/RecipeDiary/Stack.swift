@@ -23,13 +23,17 @@ class Stack: NSObject {
         self.managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
         self.managedObjectContext!.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel())
         
-        var error = NSErrorPointer()
+        let error = NSErrorPointer()
         
-        self.managedObjectContext!.persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.storeURL(), options: nil, error: error)
+        do {
+            try self.managedObjectContext!.persistentStoreCoordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.storeURL(), options: nil)
+        } catch let error1 as NSError {
+            error.memory = error1
+        }
     }
     
     func storeURL () -> NSURL? {
-        let documentsDirectory = NSFileManager.defaultManager().URLForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomain: NSSearchPathDomainMask.UserDomainMask, appropriateForURL: nil, create: true, error: nil)
+        let documentsDirectory = try? NSFileManager.defaultManager().URLForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomain: NSSearchPathDomainMask.UserDomainMask, appropriateForURL: nil, create: true)
         
         return documentsDirectory?.URLByAppendingPathComponent("db.sqlite")
     }

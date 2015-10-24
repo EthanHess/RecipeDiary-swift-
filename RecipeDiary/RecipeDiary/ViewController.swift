@@ -16,7 +16,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         //sets up collectionView
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -69,7 +69,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        let detailViewController = DetailViewController.new()
+        let detailViewController = DetailViewController()
         
         detailViewController.recipe = RecipeController.sharedInstance.recipies[indexPath.row]
         
@@ -79,7 +79,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func addRecipe() {
         
-        let detailViewController = DetailViewController.new()
+        let detailViewController = DetailViewController()
         
         navigationController?.pushViewController(detailViewController, animated: true)
         
